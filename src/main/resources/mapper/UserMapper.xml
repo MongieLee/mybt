@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mgl.dao.UserDao">
+    <insert id="insertUser" parameterType="cn.mgl.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user
+            (username, password, age, gender)
+        values (#{username}, #{password}, #{age}, #{gender})
+    </insert>
+    <delete id="deleteUser">
+        delete
+        from t_user
+        where id = #{suibiannixie}
+    </delete>
+    <update id="updateUser">
+        update t_user
+        set username=#{username}
+        where id = #{id}
+    </update>
+    <select id="selectById" resultType="cn.mgl.pojo.User">
+        select id, username, password, gender, age, created_at as createdAt
+        from t_user
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultType="User">
+        select id, username, password, gender, age, created_at as createdAt
+        from t_user
+    </select>
+    <select id="selectAllOfSort" resultType="cn.mgl.pojo.User">
+        select id, username, password, gender, age, created_at as createdAt
+        from t_user like username "%"#{brand}"%"
+    </select>
+    <select id="giveTwoParameter" resultType="cn.mgl.pojo.User">
+        select id, username, password, gender, age, created_at as createdAt
+        from t_user
+        where username = #{username}
+          and age = #{age}
+    </select>
+</mapper>
